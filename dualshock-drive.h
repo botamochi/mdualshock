@@ -1,12 +1,11 @@
 //
 // DualShock Library
-// Drive Layer for ATmega168
-// Using SPI Peripheral
+// É}ÉCÉRÉìàÀë∂èàóù
 //
 // created: 2013/10/23
 //
-#ifndef _AVR_LIB_DUALSHOCK_DRIVE_
-#define _AVR_LIB_DUALSHOCK_DRIVE_
+#ifndef _LIB_DUALSHOCK_DRIVE_
+#define _LIB_DUALSHOCK_DRIVE_
 
 void dualshock_drive_init(void);
 void dualshock_drive_begin(void);

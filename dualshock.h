@@ -1,22 +1,23 @@
 //
 // DualShock Library
-// Implement PlayStation PAD Protocol
+// プレステPADプロトコルの実装
 //
 // created: 2013/10/23
 //
 #ifndef _LIB_DUALSHOCK_PROTOCOL_
 #define _LIB_DUALSHOCK_PROTOCOL_
 
-// Controller mode
+// コントローラのタイプ(応答IDそのまま)
 #define DUALSHOCK_MODE_DIGITAL 0x41
 #define DUALSHOCK_MODE_ANALOG  0x73
 
 //----------------------------------------
-// Controller Data Structure
-// for Little Endian
+// コントローラデータ構造体
 //----------------------------------------
 
-// Button
+// ボタンデータ
+// 押されているとき値が0
+// リトルエンディアンなので注意
 struct DualshockButton {
   unsigned char square : 1;
   unsigned char cross  : 1;
@@ -35,7 +36,8 @@ struct DualshockButton {
   unsigned char select : 1;
 };
 
-// Stick
+// スティックデータ
+// 中心での値が0x80
 struct DualshockStick {
   unsigned char rx;
   unsigned char ry;
@@ -43,7 +45,8 @@ struct DualshockStick {
   unsigned char ly;
 };
 
-// Main Structure
+// 受信データ用構造体
+// ディジタルモード時はスティックのデータは無効
 typedef struct _tDualshockData {
   unsigned char          id; // response id
   struct DualshockButton button;
@@ -52,7 +55,7 @@ typedef struct _tDualshockData {
 
 
 //----------------------------------------
-// Library functions
+// ライブラリ関数
 //----------------------------------------
 void dualshock_init(void);
 int  dualshock_get_data(DualshockData *dat);

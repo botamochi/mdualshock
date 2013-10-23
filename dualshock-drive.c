@@ -1,5 +1,6 @@
 //
 // DualShock Library
+// ATmega8系 SPIペリフェラル使用
 //
 // created: 2013/10/23
 //
@@ -7,17 +8,17 @@
 #include <util/delay.h>
 #include "dualshock-drive.h"
 
-// delay time between bytes [us]
+// 通信時の1byte間の間隔(単位:us)
 #define DUALSHOCK_DELAY_TIME 200
 
-// select pin control register
+// SPI SEL端子制御用
 #define DUALSHOCK_DRIVE_PORT    PORTB
 #define DUALSHOCK_DRIVE_DDR     DDRB
 #define DUALSHOCK_DRIVE_PIN     PINB
 #define DUALSHOCK_DRIVE_PIN_SEL PB2
 
 
-// ----- Initialize -----
+// ----- 初期化処理 -----
 void dualshock_drive_init()
 {
   // Using SPI
@@ -28,27 +29,27 @@ void dualshock_drive_init()
   SPCR = _BV(SPE)|_BV(DORD)|_BV(CPOL)|_BV(CPHA)_BV(SPR1)|_BV(SPR0);
   SPSR = 0;
 
-  // Select pin initialize
+  // SEL端子制御ポート初期化
   DUALSHOCK_DRIVE_PORT |= _BV(DUALSHOCK_DRIVE_PIN_SEL);
   DUALSHOCK_DRIVE_DDR |= _BV(DUALSHOCK_DRIVE_PIN_SEL);
 }
 
 
-// ----- Begin communicate -----
+// ----- SEL端子Low出力 -----
 void dualshock_drive_begin()
 {
   DUALSHOCK_DRIVE_PORT &= ~_BV(DUALSHOCK_DRIVE_PIN_SEL);
 }
 
 
-// ----- End communicate -----
+// ----- SEL端子High出力 -----
 void dualshock_drive_end()
 {
   DUALSHOCK_DRIVE_PORT |= _BV(DUALSHOCK_DRIVE_PIN_SEL);
 }
 
 
-// ----- Put and Get one byte -----
+// ----- 1byte送受信&待機 -----
 unsigned char dualshock_drive_put_get(unsigned char dat)
 {
   unsigned char res;
