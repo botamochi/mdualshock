@@ -9,7 +9,7 @@
 #include "dualshock-drive.h"
 
 // 通信時の1byte間の間隔(単位:us)
-#define DUALSHOCK_DELAY_TIME 200
+#define DUALSHOCK_DRIVE_DELAY_TIME 200
 
 // SPI SEL端子制御用
 #define DUALSHOCK_DRIVE_PORT    PORTB
@@ -26,7 +26,7 @@ void dualshock_drive_init()
   // LSB first
   // SPI Clock mode 3
   // SCK = F_CPU / 128
-  SPCR = _BV(SPE)|_BV(DORD)|_BV(CPOL)|_BV(CPHA)_BV(SPR1)|_BV(SPR0);
+  SPCR = _BV(SPE)|_BV(MSTR)|_BV(DORD)|_BV(CPOL)|_BV(CPHA)|_BV(SPR1)|_BV(SPR0);
   SPSR = 0;
 
   // SEL端子制御ポート初期化

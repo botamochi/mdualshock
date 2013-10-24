@@ -28,6 +28,7 @@ int dualshock_get_data(DualshockData *dat)
   unsigned char i, num, id, res;
   unsigned char *buf = (unsigned char *)dat;
 
+  dualshock_drive_begin();
   dualshock_drive_put_get( DUALSHOCK_COMMAND_START );
   id = dualshock_drive_put_get( DUALSHOCK_COMMAND_GET_DATA );
   res = dualshock_drive_put_get( 0x00 );
@@ -40,5 +41,6 @@ int dualshock_get_data(DualshockData *dat)
   for (i = 1; i < num; i++) {
     buf[i] = dualshock_drive_put_get( 0x00 );
   }
+  dualshock_drive_end();
   return 0;
 }

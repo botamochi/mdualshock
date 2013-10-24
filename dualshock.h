@@ -19,21 +19,22 @@
 // 押されているとき値が0
 // リトルエンディアンなので注意
 struct DualshockButton {
-  unsigned char square : 1;
-  unsigned char cross  : 1;
-  unsigned char circle : 1;
-  unsigned char delta  : 1;
-  unsigned char right1 : 1;
-  unsigned char left1  : 1;
-  unsigned char right2 : 1;
-  unsigned char left2  : 1;
-  unsigned char left   : 1;
-  unsigned char bottom : 1;
-  unsigned char right  : 1;
-  unsigned char top    : 1;
-  unsigned char start  : 1;
-  unsigned char right3 : 1;
   unsigned char select : 1;
+  unsigned char left3  : 1;
+  unsigned char right3 : 1;
+  unsigned char start  : 1;
+  unsigned char top    : 1;
+  unsigned char right  : 1;
+  unsigned char bottom : 1;
+  unsigned char left   : 1;
+  unsigned char left2  : 1;
+  unsigned char right2 : 1;
+  unsigned char left1  : 1;
+  unsigned char right1 : 1;
+  unsigned char delta  : 1;
+  unsigned char circle : 1;
+  unsigned char cross  : 1;
+  unsigned char square : 1;
 };
 
 // スティックデータ
